@@ -12,11 +12,9 @@ Route::get('users/{id}', [\App\Http\Controllers\UserController::class, 'show'])-
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 Route::get('categories/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
-// Logged in users only
-Route::name('admin.')->group( function() {
-    Route::resource('/admin/categories', \App\Http\Controllers\AdminCategoryController::class);
-});
+require __DIR__.'/auth.php';
 
+// Authenticated User routes
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,4 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// Admin User routes
+Route::name('admin.')->middleware(['auth', 'is.admin'])->group( function() {
+    Route::resource('/admin/categories', \App\Http\Controllers\AdminCategoryController::class);
+});
+
+
