@@ -3,6 +3,8 @@
 
 <x-site-layout title="{{$post->title}}">
 
+    <img src="{{$post->media->first()->getUrl('preview')}}" alt="{{$post->title}}" class="mb-4">
+
     @foreach($post->categories as $category)
         <a href="{{route('categories.show', ['id' => $category->id])}}" class="bg-teal-500 mb-4 text-white rounded-full py-1 px-4 text-sm">
             {{$category->name}}

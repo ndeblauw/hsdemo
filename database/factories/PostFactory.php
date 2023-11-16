@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,5 +24,15 @@ class PostFactory extends Factory
             'published_at' => fake()->optional()->dateTimeBetween('-1 year', 'now'),
             'author_id' => fake()->numberBetween(1, 10),
         ];
+    }
+
+    public function configure()
+    {
+         return $this->afterCreating(function (Post $post) {
+            $url = 'https://source.unsplash.com/random/1200x800';
+            $post
+                ->addMediaFromUrl($url)
+                ->toMediaCollection();
+        });
     }
 }
