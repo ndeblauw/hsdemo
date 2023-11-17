@@ -10,7 +10,7 @@
         <li class="block shadow-sm bg-white hover:shadow-lg rounded-lg grid grid-cols-3 group overflow-hidden">
 
             <a href="{{route('posts.show', ['post' => $post])}}" class="block h-full bg-red-50 rounded-l overflow-hidden">
-                <img src="{{$post->media->first()->getUrl('preview')}}" class="rounded-l h-full group-hover:scale-110 transition duration-500 cursor-pointer object-cover">
+               <img src="{{$post->getImageUrl('preview')}}" class="rounded-l h-full group-hover:scale-110 transition duration-500 cursor-pointer object-cover">
             </a>
 
             <div class="col-span-2 p-2">
@@ -23,7 +23,7 @@
                 </div>
 
                 <a href="{{route('posts.show', ['post' => $post])}}" class="">
-                    <h2 class="font-bold text-lg" >{{$post->title}}</h2>
+                    <h2 class="font-bold text-lg line-clamp-1" >{{$post->title}}</h2>
                     <span class="">{{$post->author?->name ?? 'UNKNOWN AUTHOR' }}</span>
                     <span class="text-teal-500 mx-1">|</span>
                     <span>{{$post->published_at->format('Y-m-d H:i')}}</span>

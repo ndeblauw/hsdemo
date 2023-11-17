@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CrudSuccessMessage extends Component
+class CrudMessage extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class CrudSuccessMessage extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.crud-success-message');
+        return view('components.crud-message');
     }
 }

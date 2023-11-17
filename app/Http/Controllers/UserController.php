@@ -10,7 +10,7 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('users.index', [
+        return view('site.users.index', [
             'users' => $users,
         ]);
     }
@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return view('users.show', [
+        return view('site.users.show', [
             'user' => $user,
         ]);
     }

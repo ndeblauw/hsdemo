@@ -29,6 +29,14 @@ class Post extends Model implements HasMedia
         });
     }
 
+    // Model attributes --------------------------------------------------------
+    public function getImageUrl($conversion)
+    {
+        return ($this->media->isNotEmpty())
+            ? $this->media->first()->getUrl($conversion)
+            : '/media/default/conversions/default-'.$conversion.'.jpg';
+    }
+
     // Model Relationships -----------------------------------------------------
     public function author()
     {

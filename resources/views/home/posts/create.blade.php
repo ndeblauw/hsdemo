@@ -1,6 +1,6 @@
 <x-site-layout title="Create new post">
 
-    <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('home.posts.store')}}" method="post" enctype="multipart/form-data">
 
         @csrf
 

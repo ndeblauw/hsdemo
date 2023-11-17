@@ -8,7 +8,7 @@ class CategoryController extends Controller
     {
         $categories = \App\Models\Category::all();
 
-        return view('categories.index', [
+        return view('site.categories.index', [
             'categories' => $categories,
         ]);
     }
@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         $category = \App\Models\Category::findOrFail($id);
 
-        return view('categories.show', [
+        return view('site.categories.show', [
             'category' => $category,
         ]);
     }
