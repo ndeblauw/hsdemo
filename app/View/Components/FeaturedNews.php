@@ -16,7 +16,7 @@ class FeaturedNews extends Component
 
     public function render(): View|Closure|string
     {
-        $featured_news = Post::where('is_featured', true)->orderBy('published_at', 'desc')->take(4)->get();
+        $featured_news = Post::where('is_featured', true)->with('media')->orderBy('published_at', 'desc')->take(4)->get();
 
         return view('components.featured-news', compact('featured_news'));
     }
