@@ -48,8 +48,10 @@ class RegisteredUserController extends Controller
 
         $user->notify(new WelcomeNewUser());
 
+        /*
         $admin = User::where('is_admin', true)->first();
         $admin->notify(new InformAdminOfNewUser($user));
+        */
 
         Auth::login($user);
 
