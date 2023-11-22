@@ -3,6 +3,12 @@
 
 <x-site-layout title="{{$post->title}}">
 
+    @if(session()->has('referrer'))
+    <div class="bg-pink-500 text-pink-50 p-4 rounded my-4">
+        This article is recommended to you by {{session()->get('referrer')}}
+    </div>
+    @endif
+
     <img src="{{$post->getImageUrl('thumbnail')}}" alt="{{$post->title}}" class="mb-4">
 
     @foreach($post->categories as $category)
