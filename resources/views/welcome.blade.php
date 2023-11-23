@@ -25,7 +25,7 @@
                                 <h2 class="font-bold text-lg line-clamp-1" >{{$post->title}}</h2>
                                 <span class="">{{$post->author?->name ?? 'UNKNOWN AUTHOR' }}</span>
                                 <span class="text-teal-500 mx-1">|</span>
-                                <span>{{$post->published_at->format('Y-m-d H:i')}}</span>
+                                <span>{{$post->published_at?->format('Y-m-d H:i')}}</span>
 
                                 <div class="px-1 pt-2 line-clamp-3">
                                     {{ Str::limit( strip_tags($post->body), 200) }}

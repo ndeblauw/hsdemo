@@ -82,9 +82,13 @@ class Post extends Model implements HasMedia
     // Model method ------------------------------------------------------------------
     public function getImageUrl(string $conversion): string
     {
-        return ($this->media->isNotEmpty())
-            ? $this->media->first()->getUrl($conversion)
-            : '/media/default/conversions/default-'.$conversion.'.jpg';
+        if($this->media->isEmpty()) {
+            return '/media/default/conversions/default-'.$conversion.'.jpg';
+        }
+
+        return ($this->media->first()->generated_conversions == [])
+            ? $this->media->first()->getUrl()
+            : $this->media->first()->getUrl($conversion);
     }
 
     public function createUniqueSlug(): string
@@ -105,12 +109,10 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 200)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 300, 200);
         $this
             ->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 50, 50)
-            ->nonQueued();
+            ->fit(Manipulations::FIT_CROP, 50, 50);
 
     }
 }

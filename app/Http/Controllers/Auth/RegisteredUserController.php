@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendWelcomeMail;
 use App\Models\User;
 use App\Notifications\InformAdminOfNewUser;
 use App\Notifications\WelcomeNewUser;
@@ -46,7 +47,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $user->notify(new WelcomeNewUser());
+        SendWelcomeMail::dispatch($user);
 
         $admin = User::where('is_admin', true)->first();
         $admin?->notify(new InformAdminOfNewUser($user));
