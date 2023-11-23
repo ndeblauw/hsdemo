@@ -14,6 +14,9 @@ Route::get('categories/{id}', [\App\Http\Controllers\CategoryController::class, 
 
 
 
+// Routes for locale switching
+Route::get('lang/{locale}', \App\Http\Controllers\LanguageSwitchController::class)->name('lang.switch');
+
 require __DIR__.'/auth.php';
 
 // Authenticated User routes

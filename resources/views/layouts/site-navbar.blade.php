@@ -16,6 +16,17 @@
                                 <a href="{!! $item['url'] ?? route($item['route']) !!}" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">{{$item['label']}}</a>
                             @endif
                         @endforeach
+
+                            <div>
+                                @foreach(['en','fa', 'ru', 'nl'] as $language)
+                                    @if(session()->get('locale') == $language)
+                                        <span class="text-purple-500 font-bold uppercase">{{$language}}</span>
+                                    @else
+                                        <a href="{{route('lang.switch', ['locale' => $language])}}" class="text-white uppercase">{{$language}}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -32,7 +43,7 @@
                     <!-- Profile dropdown -->
                     @guest
                         <div class="text-white">
-                            <a href="{{route('register')}}" class="text-white uppercase py-.5 px-2">Register</a>
+                            <a href="{{route('register')}}" class="text-white uppercase py-.5 px-2">{{__('Register')}}</a>
                         </div>
 
 

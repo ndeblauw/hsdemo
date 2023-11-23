@@ -1,5 +1,7 @@
 <x-site-layout title="Welcome" >
 
+    {{__('Hello, how are you doing') }}
+
     <div class="flex gap-6">
         <div class="w-2/3">
             <h2 class="font-bold">Latest News</h2>
