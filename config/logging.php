@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily'],
+            'channels' => ['daily', 'flare'],
             'ignore_exceptions' => false,
         ],
 
@@ -71,6 +71,10 @@ return [
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
             'replace_placeholders' => true,
+        ],
+
+        'flare' => [
+            'driver' => 'flare',
         ],
 
         'slack' => [
