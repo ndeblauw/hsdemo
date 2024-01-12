@@ -21,11 +21,12 @@ Tooling used for local development:
 - [Helo](https://usehelo.com/) for email testing
 - [Tinkerwell](https://tinkerwell.app/) for testing/debugging during development (paid)
 
-## Env keys
-The following env keys are used:
-- `MAIL_MAILER` for the emails
+## Environment keys
+The following env keys (extra compared to a standard Laravel project) are used:
 - `API_NINJAS_API_KEY` (go to [api-ninjas.com](https://api-ninjas.com/) to get a free key)
-
+- `IPSTACK_API_KEY` (go to [ipstack.com](https://ipstack.com/) to get a free key)
+- `OPENWEATHERMAP_API_KEY` (go to [openweathermap.org](https://openweathermap.org/) to get a free key)
+- `FLARE_KEY` (go to [flareapp.io](https://flareapp.io/) to obtain a key - **not free**)
 
 ## Installation instructions
 Clone the repository and install the dependencies:
