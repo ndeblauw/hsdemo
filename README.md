@@ -21,6 +21,12 @@ Tooling used for local development:
 - [Helo](https://usehelo.com/) for email testing
 - [Tinkerwell](https://tinkerwell.app/) for testing/debugging during development (paid)
 
+## Env keys
+The following env keys are used:
+- `MAIL_MAILER` for the emails
+- `API_NINJAS_API_KEY` (go to [api-ninjas.com](https://api-ninjas.com/) to get a free key)
+
+
 ## Installation instructions
 Clone the repository and install the dependencies:
 
@@ -39,8 +45,13 @@ Set the application key
 php artisan key:generate
 ```
 
+### Development
 Make sure a (local) email testing service is running (e.g. Helo)
 
+### Production
+- It's better to use the **database driver for the queues** (and don't forget to configure a queue worker).
+- Don't forget to **set up the scheduler** (e.g. cron job) to run the schedule:run command every minute.
+- The scheduler comes with a **backup service**, don't forget to configure a remote S3 disk (or change the backup location) to have this working
 
 ## Contributing
 Any pull request from a student that improves this code is welcomed.
