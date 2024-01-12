@@ -9,22 +9,22 @@ use Illuminate\View\Component;
 
 class WeatherPlugin extends Component
 {
-    public $temperature;
-    public $description;
-    public $city;
+    public int $temperature;
+    public string $description;
+    public string $city;
+    private Weather $weather;
 
     public function __construct()
     {
-        //
+        $this->weather = (new Weather())
+            ->setLocationFromIp(request()->ip());
     }
 
     public function render(): View|Closure|string
     {
-        $weather = new Weather();
-        $weather = $weather->setLocationFromIp(request()->ip());
-        $this->temperature = $weather->getTemperature();
-        $this->description = $weather->getDescription();
-        $this->city = $weather->city;
+        $this->temperature = (int) $this->weather->getTemperature();
+        $this->description = $this->weather->getDescription();
+        $this->city = $this->weather->city;
 
         return view('components.weather-plugin');
     }
