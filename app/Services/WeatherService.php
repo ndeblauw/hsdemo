@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Http;
 
 class WeatherService
 {
-    private $endpoint = "https://api.openweathermap.org/data/2.5";
-    private $api_key = "4133a59570cf388de4679424280beee6";
+    private string $endpoint;
+    private string $api_key;
     private $cache_ttl;
 
     private float $lat;
@@ -16,6 +16,9 @@ class WeatherService
 
     public function __construct()
     {
+        $this->endpoint = config('services.openweathermap.endpoint');
+        $this->api_key = config('services.openweathermap.api_key');
+
         $this->cache_ttl = config('app.env') === 'production' ? 3600 : 1;
     }
 
@@ -55,13 +58,17 @@ class WeatherService
 
     private function getCityInformation(string $city): object
     {
-        $response = Http::acceptJson()->get("http://api.openweathermap.org/geo/1.0".'/direct', [
-            "q" => $city,
-            "limit" => 1,
-            "appid" => $this->api_key
-        ]);
-
-        return json_decode($response->body())[0];
+        return cache()->remember(
+            key: "weather-city-{$city}",
+            ttl: $this->cache_ttl,
+            callback: function () use ($city) {
+                $response = Http::acceptJson()->get($this->endpoint . '/geo/1.0/direct', [
+                    "q" => $city,
+                    "limit" => 1,
+                    "appid" => $this->api_key
+                ]);
+                return json_decode($response->body())[0];
+            });
     }
 
     private function getWeather()
@@ -70,8 +77,7 @@ class WeatherService
             key: "weather-{$this->lat}-{$this->lon}",
             ttl: $this->cache_ttl,
             callback: function () {
-                ray('hitting the endpoint');
-                $response = Http::acceptJson()->get($this->endpoint.'/weather', [
+                $response = Http::acceptJson()->get($this->endpoint.'/data/2.5/weather', [
                     "lat" => $this->lat,
                     "lon" => $this->lon,
                     "units" => "metric",

@@ -39,6 +39,11 @@ return [
         'api_key' => env('API_NINJAS_API_KEY'),
     ],
 
+    'openweathermap' => [
+        'endpoint' => 'https://api.openweathermap.org',
+        'api_key' => env('OPENWEATHERMAP_API_KEY'),
+    ],
+
     'ipstack' => [
         'endpoint' => 'http://api.ipstack.com',
         'api_key' => env('IPSTACK_API_KEY'),
