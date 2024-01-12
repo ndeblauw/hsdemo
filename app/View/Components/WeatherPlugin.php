@@ -2,7 +2,7 @@
 
 namespace App\View\Components;
 
-use App\Services\Weather;
+use App\Services\WeatherService;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -12,11 +12,11 @@ class WeatherPlugin extends Component
     public int $temperature;
     public string $description;
     public string $city;
-    private Weather $weather;
+    private WeatherService $weather;
 
     public function __construct()
     {
-        $this->weather = (new Weather())
+        $this->weather = (new WeatherService())
             ->setLocationFromIp(request()->ip());
     }
 

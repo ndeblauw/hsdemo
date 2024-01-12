@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class Weather
+class WeatherService
 {
     private $endpoint = "https://api.openweathermap.org/data/2.5";
     private $api_key = "4133a59570cf388de4679424280beee6";
