@@ -30,8 +30,8 @@ class WelcomeController extends Controller
 
     private function getQuote(string $category): ?object
     {
-        $endpoint = "https://api.api-ninjas.com/v1/quotes";
-        $api_key = "AbPwNFtbXZMG/BrbJ35Oug==LnmwnCbMeFK2Ssal";
+        $endpoint = config('services.apininjas.endpoints.quotes');
+        $api_key = config('services.apininjas.api_key');
 
         try {
             $response = Http::acceptJson()
