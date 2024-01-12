@@ -42,26 +42,24 @@
             </ul>
         </div>
 
-        <div class="w-1/3 border border-teal-500 rounded-sm p-4">
+        <div class="w-1/3">
+            <x-weather-plugin/>
+
             @if($quote!==null)
-            <div class="p-4 bg-gray-200">
-                {{$quote->quote}}
-            </div>
+                <div class="p-4 bg-gray-200 mb-6">
+                    {{$quote->quote}}
+                </div>
             @endif
 
-
-                <x-weather-plugin/>
-
-
-
-            <h2 class="font-bold">Our top authors</h2>
-            <div class="grid gap-4">
-                @foreach($authors as $author)
-                    <div>
-                        {{$author->name }}
-                    </div>
-                @endforeach
-
+            <div class="border border-teal-500 rounded-sm p-4">
+                <h2 class="font-bold">Our top authors</h2>
+                <div class="grid gap-4">
+                    @foreach($authors as $author)
+                        <div>
+                            {{$author->name }}
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
         </div>
