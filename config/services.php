@@ -37,6 +37,11 @@ return [
             'quotes' => 'https://api.api-ninjas.com/v1/quotes',
         ],
         'api_key' => env('API_NINJAS_API_KEY'),
-    ]
+    ],
+
+    'ipstack' => [
+        'endpoint' => 'http://api.ipstack.com',
+        'api_key' => env('IPSTACK_API_KEY'),
+    ],
 
 ];

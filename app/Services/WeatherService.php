@@ -21,17 +21,10 @@ class Weather
 
     public function setLocationFromIp(string $ip): self
     {
-        // Hack for local development
-        $ip = $ip === '127.0.0.1' ? '8.8.8.8' : $ip;
+        $ip = (new IpLocationService())->for($ip)->get();
 
-        $response = Http::get(
-            "http://api.ipstack.com/{$ip}?access_key=f71ae0a01058fa91febcbf855f30eafb"
-        );
-        $response = json_decode($response);
-
-        $this->city = $response->city;
-        $this->lat = $response->latitude;
-        $this->lon = $response->longitude;
+        $this->city = $ip->city;
+        [$this->lat, $this->lon] = $ip->coordinates;
 
         return $this;
     }
