@@ -45,17 +45,13 @@ class WeatherService
 
     public function getTemperature()
     {
-        $data = $this->getWeather();
-        return $data->main->temp;
+        return $this->getWeather()->main->temp;
     }
 
     public function getDescription()
     {
-        $data = $this->getWeather();
-        return $data->weather[0]->description;
+        return $this->getWeather()->weather[0]->description;
     }
-
-
 
     private function getCityInformation(string $city): object
     {
