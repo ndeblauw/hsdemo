@@ -32,10 +32,11 @@ class WeatherService
         return $this;
     }
 
-    public function setLocation(string $city): self
+    public function setLocationFromCity(string $city): self
     {
         $location = $this->getCityInformation($city);
 
+        $this->city = $city;
         $this->lat = $location->lat;
         $this->lon = $location->lon;
 
