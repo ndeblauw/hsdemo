@@ -50,6 +50,10 @@
             @endif
 
 
+                <x-weather-plugin/>
+
+
+
             <h2 class="font-bold">Our top authors</h2>
             <div class="grid gap-4">
                 @foreach($authors as $author)
