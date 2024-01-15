@@ -40,13 +40,17 @@
                     </li>
                 @endforeach
             </ul>
+
+            <livewire:todos user_id="11"/>
         </div>
 
         <div class="w-1/3">
             <x-weather-plugin/>
 
+            <livewire:hello-world/>
+
             @if($quote!==null)
-                <div class="p-4 bg-gray-200 mb-6">
+                <div class="p-4 bg-gray-200 my-6">
                     {{$quote->quote}}
                 </div>
             @endif
