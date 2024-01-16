@@ -45,7 +45,7 @@
         </div>
 
         <div class="w-1/3">
-            <x-weather-plugin/>
+            <livewire:weather-show-plugin/>
 
             <livewire:hello-world/>
 
