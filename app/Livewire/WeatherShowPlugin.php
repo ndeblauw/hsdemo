@@ -8,24 +8,20 @@ use Livewire\Component;
 class WeatherShowPlugin extends Component
 {
     public bool $showChangeCityForm = false;
+
     public int $temperature;
+
     public string $description;
+
     public string $city;
-    private WeatherService $weather;
 
     public function __construct()
     {
-        $this->weather = (new WeatherService());
+        $weather = app(WeatherService::class);
 
-        if( session()->has('weather_show_plugin_city') ) {
-
-            $this->weather = $this->weather
-                ->setLocationFromCity(session()->get('weather_show_plugin_city'));
-        } else {
-            $this->weather = $this->weather
-                ->setLocationFromIp(request()->ip());
-        }
-
+        $this->weather = session()->has('weather_show_plugin_city')
+            ? $weather->setLocationFromCity(session()->get('weather_show_plugin_city'))
+            : $weather->setLocationFromIp(request()->ip());
     }
 
     public function setCity()
