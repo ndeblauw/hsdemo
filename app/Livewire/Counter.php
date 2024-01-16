@@ -10,11 +10,6 @@ class Counter extends Component
     public bool $show_counter = true;
     public int $amount = 1;
 
-    public function showCounter()
-    {
-        $this->show_counter = true;
-    }
-
     public function increment()
     {
         $this->counter += $this->amount;

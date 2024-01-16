@@ -7,5 +7,13 @@
 
     <livewire:counter/>
 
+    @if($crazy)
+        <div
+            wire:poll.5s="$set('crazy', false)"
+            class="bg-indigo-300 text-indigo-600 p-2 rounded hover:bg-indigo-200 mt-4 text-center text-4xl">
+            CRAZY
+        </div>
+    @endif
+
 
 </div>

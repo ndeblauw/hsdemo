@@ -39,6 +39,8 @@ class Todos extends Component
         // validation + authorisation
         $this->todos[] = $this->todo;
         $this->todo = '';
+
+        $this->dispatch('myCrazyEvent', 'crazy');
     }
 
     public function render()

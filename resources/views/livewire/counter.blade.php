@@ -9,6 +9,6 @@
             <button wire:click.throttle.1000="decrement()" class="w-1/3 bg-red-300 text-red-600 p-2 rounded hover:bg-red-200">- {{$amount}}</button>
         </div>
     @else
-        <button wire:click="showCounter" class="bg-red-300 text-red-600 p-2 rounded hover:bg-red-200">Show counter</button>
+        <button wire:click="$toggle('show_counter')" class="bg-red-300 text-red-600 p-2 rounded hover:bg-red-200">Show counter</button>
     @endif
 </div>
