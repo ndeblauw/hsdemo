@@ -11,17 +11,12 @@ class WeatherShowPlugin extends Component
     public int $temperature;
     public string $description;
     public string $city;
-    private WeatherService $weather;
 
     public function __construct()
     {
-        $ip_service_class = config("services.ipservice");
-        $ipservice = new $ip_service_class();
-
-        $this->weather = new WeatherService($ipservice);
+        $this->weather = app(WeatherService::class);
 
         if( session()->has('weather_show_plugin_city') ) {
-
             $this->weather = $this->weather
                 ->setLocationFromCity(session()->get('weather_show_plugin_city'));
         } else {

@@ -33,8 +33,8 @@ return [
     ],
 
     'ipservice' => match(env('IPSERVICE')) {
-        'iplocation' => App\Services\IpLocationService::class,
-        'ipinfo' => \App\Services\IpInfoService::class,
+        'iplocation' => \App\Services\Implementations\IpLocationService::class,
+        'ipinfo' => \App\Services\Implementations\IpInfoService::class,
 
         default => null,
     },
