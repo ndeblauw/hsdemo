@@ -15,7 +15,10 @@ class WeatherShowPlugin extends Component
 
     public function __construct()
     {
-        $this->weather = (new WeatherService());
+        $ip_service_class = config("services.ipservice");
+        $ipservice = new $ip_service_class();
+
+        $this->weather = new WeatherService($ipservice);
 
         if( session()->has('weather_show_plugin_city') ) {
 

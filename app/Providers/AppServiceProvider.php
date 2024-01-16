@@ -15,5 +15,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::preventLazyLoading(! app()->isProduction());
+
+        $this->app->singleton(\App\Services\IpService::class, fn() => new \App\Services\IpInfoService());
+
     }
 }
