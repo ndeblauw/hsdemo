@@ -32,6 +32,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'ipservice' => match (env('IPSERVICE')) {
+        'iplocation' => \App\Services\Implementations\IpLocationService::class,
+        'ipinfo' => \App\Services\Implementations\IpInfoService::class,
+
+        default => null,
+    },
+
     'apininjas' => [
         'endpoints' => [
             'quotes' => 'https://api.api-ninjas.com/v1/quotes',

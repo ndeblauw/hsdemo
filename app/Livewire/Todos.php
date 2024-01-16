@@ -8,10 +8,12 @@ use Livewire\Component;
 class Todos extends Component
 {
     public $todos = [];
+
     public $todo = '';
+
     public $user_id;
 
-    public function mount( int $user_id)
+    public function mount(int $user_id)
     {
         // Initialize component
         $this->user_id = $user_id;

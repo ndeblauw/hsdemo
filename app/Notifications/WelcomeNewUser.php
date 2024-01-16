@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -25,7 +24,7 @@ class WelcomeNewUser extends Notification
     {
         return (new MailMessage)
             ->subject('Welcome to HSdemo Blog')
-            ->greeting('Hello ' . $notifiable->name.',')
+            ->greeting('Hello '.$notifiable->name.',')
             ->line('Welcome to our <strong>great blog</strong>, we are sure you are going to enjoy')
             ->action('Read the latest articles', route('posts.index'))
             ->line('Thank you for registering with us!')

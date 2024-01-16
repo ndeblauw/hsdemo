@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -22,15 +21,13 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-         /*
+        /*
         if($post->published_at === null) {
-            abort(403, 'This post is not published yet.');
+           abort(403, 'This post is not published yet.');
         }*/
 
         return view('site.posts.show', [
             'post' => $post,
         ]);
     }
-
-
 }

@@ -9,7 +9,9 @@ use Illuminate\View\Component;
 class SiteLayoutNavbar extends Component
 {
     public array $menu_items;
+
     public array $home_menu_items;
+
     public array $admin_menu_items;
 
     public function __construct()

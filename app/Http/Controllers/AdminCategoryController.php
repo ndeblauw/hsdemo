@@ -65,7 +65,7 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.show', $category->id);
     }
 
-   public function destroy(Category $category)
+    public function destroy(Category $category)
     {
         $category->delete();
 

@@ -32,7 +32,7 @@ class Post extends Model implements HasMedia
             $post->slug = $post->slug ?? $post->createUniqueSlug();
         });
 
-        static::updated(function($post) {
+        static::updated(function ($post) {
             Cache::forget('welcome.recent_news');
             Cache::forget('featured_news');
         });
@@ -57,7 +57,7 @@ class Post extends Model implements HasMedia
 
     public function getIsOldAttribute(): bool
     {
-        if($this->published_at === null) {
+        if ($this->published_at === null) {
             return false;
         }
 
@@ -66,7 +66,7 @@ class Post extends Model implements HasMedia
 
     public function getTimeSincePublishedAttribute(): string
     {
-        if($this->is_old) {
+        if ($this->is_old) {
             return 'very old post';
         }
 

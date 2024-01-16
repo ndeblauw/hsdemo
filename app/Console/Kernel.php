@@ -14,7 +14,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run')->daily()->at('01:30');
     }
 
-
     /**
      * Register the commands for the application.
      */

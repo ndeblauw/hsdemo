@@ -25,7 +25,6 @@ class PostController extends Controller
     {
         $this->checkIfUserHasAccess($post);
 
-
         /*
        if($post->published_at === null) {
            abort(403, 'This post is not published yet.');
@@ -71,7 +70,7 @@ class PostController extends Controller
         }
         */
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $post->addMediaFromRequest('image')->toMediaCollection();
         }
 
@@ -103,10 +102,10 @@ class PostController extends Controller
 
     private function checkIfUserHasAccess(Post $post)
     {
-        if( auth()->id() !== $post->author_id) {
+        if (auth()->id() !== $post->author_id) {
             session()->flash('error_notification', "You are not authorized to see or to make changes to Post with id '{$post->id}'");
+
             return redirect()->back();
         }
     }
-
 }

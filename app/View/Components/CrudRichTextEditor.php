@@ -9,9 +9,12 @@ use Illuminate\View\Component;
 class CrudRichTextEditor extends Component
 {
     public string $name;
+
     public string $label;
-    public null|string $value;
-    public null|string $placeholder;
+
+    public ?string $value;
+
+    public ?string $placeholder;
 
     public function __construct(string $name, string $label, string $value = null, string $placeholder = null)
     {

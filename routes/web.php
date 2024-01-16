@@ -12,8 +12,6 @@ Route::get('users/{user}', [\App\Http\Controllers\UserController::class, 'show']
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 Route::get('categories/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
-
-
 // Routes for locale switching
 Route::get('lang/{locale}', \App\Http\Controllers\LanguageSwitchController::class)->name('lang.switch');
 
@@ -34,8 +32,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin User routes
-Route::name('admin.')->middleware(['auth', 'is.admin'])->group( function() {
+Route::name('admin.')->middleware(['auth', 'is.admin'])->group(function () {
     Route::resource('/admin/categories', \App\Http\Controllers\AdminCategoryController::class);
 });
-
-

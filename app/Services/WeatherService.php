@@ -2,19 +2,24 @@
 
 namespace App\Services;
 
+use App\Services\Interfaces\IpService;
 use Illuminate\Support\Facades\Http;
 
 class WeatherService
 {
     private string $endpoint;
+
     private string $api_key;
+
     private $cache_ttl;
 
     private float $lat;
+
     private float $lon;
+
     public string $city;
 
-    public function __construct()
+    public function __construct(protected IpService $ipservice)
     {
         $this->endpoint = config('services.openweathermap.endpoint');
         $this->api_key = config('services.openweathermap.api_key');
@@ -24,7 +29,7 @@ class WeatherService
 
     public function setLocationFromIp(string $ip): self
     {
-        $ip = (new IpLocationService())->for($ip)->get();
+        $ip = $this->ipservice->for($ip)->get();
 
         $this->city = $ip->city;
         [$this->lat, $this->lon] = $ip->coordinates;
@@ -59,11 +64,12 @@ class WeatherService
             key: "weather-city-{$city}",
             ttl: $this->cache_ttl,
             callback: function () use ($city) {
-                $response = Http::acceptJson()->get($this->endpoint . '/geo/1.0/direct', [
-                    "q" => $city,
-                    "limit" => 1,
-                    "appid" => $this->api_key
+                $response = Http::acceptJson()->get($this->endpoint.'/geo/1.0/direct', [
+                    'q' => $city,
+                    'limit' => 1,
+                    'appid' => $this->api_key,
                 ]);
+
                 return json_decode($response->body())[0];
             });
     }
@@ -75,15 +81,13 @@ class WeatherService
             ttl: $this->cache_ttl,
             callback: function () {
                 $response = Http::acceptJson()->get($this->endpoint.'/data/2.5/weather', [
-                    "lat" => $this->lat,
-                    "lon" => $this->lon,
-                    "units" => "metric",
-                    "appid" => $this->api_key
+                    'lat' => $this->lat,
+                    'lon' => $this->lon,
+                    'units' => 'metric',
+                    'appid' => $this->api_key,
                 ]);
+
                 return json_decode($response->body());
             });
     }
-
-
-
 }

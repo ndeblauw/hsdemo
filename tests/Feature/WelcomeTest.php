@@ -10,12 +10,11 @@ test('welcome page is being displayed', function () {
     $response->assertStatus(200);
 });
 
-
 test('4 most recent articles are shown', function () {
     // Arrange
     $posts = Post::factory(5)->withoutAfterCreating()->published()
         ->create(['is_featured' => false])
-        ->sortByDesc(fn($p) => $p->published_at);
+        ->sortByDesc(fn ($p) => $p->published_at);
 
     // Act
     $response = $this->get('/');
@@ -25,15 +24,17 @@ test('4 most recent articles are shown', function () {
     $response->assertDontSee($posts->skip(4)->take(1)->first()->title);
 });
 
-
 test('4 most recent articles are shown (and no unpublished ones)', function () {
     // Arrange
     $posts = Post::factory(5)->withoutAfterCreating()->published()
         ->create(['is_featured' => false])
-        ->sortByDesc(fn($p) => $p->published_at);
+        ->sortByDesc(fn ($p) => $p->published_at);
 
-    $posts = $posts->map( function($p) use($posts) {
-        if($p == $posts->first()) {$p->update(['published_at' => null]);}
+    $posts = $posts->map(function ($p) use ($posts) {
+        if ($p == $posts->first()) {
+            $p->update(['published_at' => null]);
+        }
+
         return $p;
     });
 
