@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use \App\Services\Interfaces\IpService;
 
 class WeatherService
 {
@@ -14,7 +15,7 @@ class WeatherService
     private float $lon;
     public string $city;
 
-    public function __construct()
+    public function __construct(protected IpService $ipservice)
     {
         $this->endpoint = config('services.openweathermap.endpoint');
         $this->api_key = config('services.openweathermap.api_key');
@@ -24,7 +25,7 @@ class WeatherService
 
     public function setLocationFromIp(string $ip): self
     {
-        $ip = (new IpLocationService())->for($ip)->get();
+        $ip = $this->ipservice->for($ip)->get();
 
         $this->city = $ip->city;
         [$this->lat, $this->lon] = $ip->coordinates;
