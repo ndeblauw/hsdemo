@@ -1,6 +1,8 @@
 <div class="my-4 bg-gray-200 p-4">
 
-    <h2 class="font-bold text-2xl">Todo list for user {{$user->name}}</h2>
+
+    <h2 class="font-bold text-2xl">Todo list for user {{$user?->name ?? 'guest'}}</h2>
+
 
     <form wire:submit="addTodo">
         <input wire:model.change="todo" type="text">
