@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Notifications\InformAuthorOfPurchase;
+use App\Notifications\ThankSponsorAfterPurchase;
 use Illuminate\Http\Request;
 use Mollie\Laravel\Facades\Mollie;
 
@@ -12,7 +15,7 @@ class PurchaseArticleController extends Controller
     {
         $webhook_url = config('app.env') === 'production'
             ? route('webhooks.mollie')
-            : "https://rg1jldtu1w.sharedwithexpose.com/webhooks/mollie";
+            : "https://yjves6yjou.sharedwithexpose.com/webhooks/mollie";
 
         // validate!!!!!!!!!!!!
         $price = $request->amount;
@@ -45,6 +48,8 @@ class PurchaseArticleController extends Controller
         $paymentId = $request->input('id');
         $payment = Mollie::api()->payments->get($paymentId);
 
+        ray($payment);
+
         if($payment->isPaid()) {
             $post = Post::find($payment->metadata->post_id);
 
@@ -52,9 +57,8 @@ class PurchaseArticleController extends Controller
                     'sponsor_id' => $payment->metadata->sponsor_id,
                 ]);
 
-            // Send thank you notification (and invoice) to user who bought the article
-
-            // Send info to author of the post to inform about income
+            $post->sponsor->notify(new ThankSponsorAfterPurchase($post));
+            $post->author->notify(new InformAuthorOfPurchase($post));
         }
     }
 
