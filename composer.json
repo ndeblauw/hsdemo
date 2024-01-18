@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "league/flysystem-aws-s3-v3": "^3.0",
         "livewire/livewire": "^3.3",
+        "mollie/laravel-mollie": "^2.25",
         "spatie/laravel-backup": "^8.4",
         "spatie/laravel-ignition": "^2.4",
         "spatie/laravel-medialibrary": "^10.0.0",

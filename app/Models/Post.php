@@ -49,6 +49,11 @@ class Post extends Model implements HasMedia
         return $this->belongsToMany(Category::class);
     }
 
+    public function sponsor(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'sponsor_id');
+    }
+
     // Model attributes --------------------------------------------------------
     public function getThumbnailUrlAttribute(): string
     {
@@ -80,6 +85,11 @@ class Post extends Model implements HasMedia
     }
 
     // Model method ------------------------------------------------------------------
+    public function isSponsored()
+    {
+        return $this->sponsor_id !== null;
+    }
+
     public function getImageUrl(string $conversion): string
     {
         return ($this->media->isNotEmpty())

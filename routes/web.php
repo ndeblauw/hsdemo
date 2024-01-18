@@ -5,8 +5,16 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'welcome'])->name('welcome');
+
 Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post:slug}/buy', [\App\Http\Controllers\PurchaseArticleController::class, 'preparePayment'])->middleware('auth')->name('posts.purchase');
+
+Route::get('posts/{post:slug}/success', [\App\Http\Controllers\PurchaseArticleController::class, 'success'])->name('posts.purchase.success');
+Route::post('webhooks/mollie', [\App\Http\Controllers\PurchaseArticleController::class, 'webhook'])->name('webhooks.mollie');
+
+
+
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 Route::get('users/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
