@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -42,15 +43,8 @@ class PostController extends Controller
         return view('home.posts.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:5', 'max:20'],
-            'body' => ['required', 'min:5', 'max:2000'],
-            'categories' => ['nullable', 'array'],
-            'image' => ['file'],
-        ]);
-
         $post = Post::create([
             'title' => $request->title,
             'body' => $request->body,
