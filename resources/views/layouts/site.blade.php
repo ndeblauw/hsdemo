@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HTML5 Boilerplate</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    {{--
-    <script src="//unpkg.com/alpinejs" defer></script>
-    --}}
+    @livewireScripts
 </head>
 
 <body class="h-full">
