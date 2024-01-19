@@ -2,7 +2,7 @@
     <a class="underline" href="{{route('home.posts.index')}}">Back to the index</a>
 
 
-    <x-crud-success-message/>
+    <x-crud-message/>
 
 
     <p class="font-bold">

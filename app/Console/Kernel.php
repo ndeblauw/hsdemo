@@ -9,10 +9,10 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('inspire')->everyMinute();
-        $schedule->command('app:test-scheduler')->everyMinute();
+        // Running and cleaning the backups
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('01:30');
     }
-
 
     /**
      * Register the commands for the application.

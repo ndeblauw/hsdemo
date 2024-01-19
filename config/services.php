@@ -23,12 +23,37 @@ return [
 
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
+        'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
     ],
 
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'ipservice' => match (env('IPSERVICE')) {
+        'iplocation' => \App\Services\Implementations\IpLocationService::class,
+        'ipinfo' => \App\Services\Implementations\IpInfoService::class,
+
+        default => null,
+    },
+
+    'apininjas' => [
+        'endpoints' => [
+            'quotes' => 'https://api.api-ninjas.com/v1/quotes',
+        ],
+        'api_key' => env('API_NINJAS_API_KEY'),
+    ],
+
+    'openweathermap' => [
+        'endpoint' => 'https://api.openweathermap.org',
+        'api_key' => env('OPENWEATHERMAP_API_KEY'),
+    ],
+
+    'ipstack' => [
+        'endpoint' => 'http://api.ipstack.com',
+        'api_key' => env('IPSTACK_API_KEY'),
     ],
 
 ];

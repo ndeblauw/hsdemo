@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,6 @@ class PostController extends Controller
     {
         $this->checkIfUserHasAccess($post);
 
-
         /*
        if($post->published_at === null) {
            abort(403, 'This post is not published yet.');
@@ -38,17 +38,13 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('home.posts.create');
+        $categories = \App\Models\Category::orderBy('name')->pluck('name', 'id');
+
+        return view('home.posts.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $request->validate([
-            'title' => ['required', 'min:5', 'max:20'],
-            'body' => ['required', 'min:5', 'max:2000'],
-            'image' => ['file'],
-        ]);
-
         $post = Post::create([
             'title' => $request->title,
             'body' => $request->body,
@@ -56,7 +52,19 @@ class PostController extends Controller
             'author_id' => auth()->id(),
         ]);
 
-        if($request->hasFile('image')) {
+        $post->categories()->attach($request->categories);
+
+        /* alternative use case: have free text input instead of structured:
+        $category_list = str($request->categories)->replace(' ', '')->explode(',');
+        foreach($category_list as $category_name) {
+            $category = \App\Models\Category::firstOrCreate(
+                ['name' => $category_name]
+            );
+            $post->categories()->attach($category);
+        }
+        */
+
+        if ($request->hasFile('image')) {
             $post->addMediaFromRequest('image')->toMediaCollection();
         }
 
@@ -88,10 +96,10 @@ class PostController extends Controller
 
     private function checkIfUserHasAccess(Post $post)
     {
-        if( auth()->id() !== $post->author_id) {
+        if (auth()->id() !== $post->author_id) {
             session()->flash('error_notification', "You are not authorized to see or to make changes to Post with id '{$post->id}'");
+
             return redirect()->back();
         }
     }
-
 }

@@ -5,14 +5,23 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'welcome'])->name('welcome');
+
 Route::get('posts', [\App\Http\Controllers\PostController::class, 'index'])->name('posts.index');
 Route::get('posts/{post:slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{post:slug}/buy', [\App\Http\Controllers\PurchaseArticleController::class, 'preparePayment'])->middleware('auth')->name('posts.purchase');
+
+Route::get('posts/{post:slug}/success', [\App\Http\Controllers\PurchaseArticleController::class, 'success'])->name('posts.purchase.success');
+Route::post('webhooks/mollie', [\App\Http\Controllers\PurchaseArticleController::class, 'webhook'])->name('webhooks.mollie');
+
+
+
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
-Route::get('users/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
+Route::get('users/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 Route::get('categories/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 
-
+// Routes for locale switching
+Route::get('lang/{locale}', \App\Http\Controllers\LanguageSwitchController::class)->name('lang.switch');
 
 require __DIR__.'/auth.php';
 
@@ -31,8 +40,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin User routes
-Route::name('admin.')->middleware(['auth', 'is.admin'])->group( function() {
+Route::name('admin.')->middleware(['auth', 'is.admin'])->group(function () {
     Route::resource('/admin/categories', \App\Http\Controllers\AdminCategoryController::class);
 });
-
-

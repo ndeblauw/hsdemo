@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Collection;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -27,6 +28,16 @@ class PostFactory extends Factory
         ];
     }
 
+    public function published(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            ];
+        });
+    }
+
+    /*
     public function configure()
     {
          return $this->afterCreating(function (Post $post) {
@@ -35,5 +46,13 @@ class PostFactory extends Factory
                 ->addMediaFromUrl($url)
                 ->toMediaCollection();
         });
+    }*/
+
+    // Solution from https://laracasts.com/discuss/channels/testing/how-to-disable-factory-callbacks
+    public function withoutAfterCreating()
+    {
+        $this->afterCreating = new Collection;
+
+        return $this;
     }
 }

@@ -29,7 +29,7 @@
                     <span>{{$post->published_at->format('Y-m-d H:i')}}</span>
 
                     <div class="px-1 pt-2 line-clamp-3">
-                        {{ Str::limit($post->body, 200) }}
+                        {{ Str::limit( strip_tags($post->body), 200) }}
                     </div>
                 </a>
 

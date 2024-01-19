@@ -8,17 +8,15 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::select(['id', 'name'])->withCount('posts')->get();
 
         return view('site.users.index', [
             'users' => $users,
         ]);
     }
 
-    public function show(string $id)
+    public function show(User $user)
     {
-        $user = User::findOrFail($id);
-
         return view('site.users.show', [
             'user' => $user,
         ]);
