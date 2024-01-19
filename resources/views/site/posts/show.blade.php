@@ -11,9 +11,9 @@
 
     <div class="flex justify-between gap-x-8">
         <div>
-            @include('site\posts\_show_purchase_flash_messages')
+            @include('site.posts._show_purchase_flash_messages')
 
-            @include('site\posts\_show_sponsorship')
+            @include('site.posts._show_sponsorship')
 
             <img src="{{$post->getImageUrl('thumbnail')}}" alt="{{$post->title}}" class="mb-4">
 
