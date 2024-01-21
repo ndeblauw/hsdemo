@@ -16,35 +16,16 @@ class WelcomeController extends Controller
         }
 
         $recent_news = Cache::remember('welcome.recent_news', config('app.cache_ttl'), function () {
-            return Post::isPublished()->with(['media', 'categories', 'author'])->orderBy('published_at', 'desc')->take(4)->get();
+            return Post::isPublished()->with(['media', 'categories', 'author'])->take(4)->orderByDesc('published_at')->get();
         });
+
+        ray($recent_news->pluck('published_at', 'id')->map(fn($d) => $d?->toDateString())->toArray())->blue();
 
         $authors = Cache::remember('welcome.authors', config('app.cache_ttl'), function () {
             return User::select(['name'])->with('posts')->get();
         });
 
-        $quote = $this->getQuote('money');
-
-        return view('welcome', compact('recent_news', 'authors', 'quote'));
+        return view('welcome', compact('recent_news', 'authors'));
     }
 
-    private function getQuote(string $category): ?object
-    {
-        $endpoint = config('services.apininjas.endpoints.quotes');
-        $api_key = config('services.apininjas.api_key');
-
-        try {
-            $response = Http::acceptJson()
-                ->withHeaders(['X-Api-Key' => $api_key])
-                ->get($endpoint, [
-                    'category' => $category,
-                ]);
-
-            $quote = json_decode($response->body())[0];
-        } catch (\Throwable $th) {
-            $quote = null;
-        }
-
-        return $quote;
-    }
 }

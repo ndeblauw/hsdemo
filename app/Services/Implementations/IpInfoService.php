@@ -37,7 +37,10 @@ class IpInfoService implements IpService
         $response = json_decode($response->body());
 
         $this->city = $response->city;
-        $this->coordinates = str($response->loc)->explode(',')->map(fn ($string) => (float) $string)->toArray();
+        $this->coordinates = str($response->loc)
+            ->explode(',')
+            ->map(fn (string $string) => (float) $string)
+            ->toArray();
 
         return $this;
     }

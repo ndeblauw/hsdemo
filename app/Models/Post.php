@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
-use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -69,6 +70,11 @@ class Post extends Model implements HasMedia
         return $this->published_at->lt(now()->subMonths(2));
     }
 
+    public function getIsPublishedAttribute(): bool
+    {
+        return $this->published_at !== null;
+    }
+
     public function getTimeSincePublishedAttribute(): string
     {
         if ($this->is_old) {
@@ -79,9 +85,11 @@ class Post extends Model implements HasMedia
     }
 
     // Model scopes -----------------------------------------------------------------
-    public function scopeIsPublished($query)
+    public function scopeIsPublished(Builder $builder)
     {
-        return $query->whereNotNull('published_at');
+        return $builder
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now());
     }
 
     // Model method ------------------------------------------------------------------
@@ -115,11 +123,11 @@ class Post extends Model implements HasMedia
     {
         $this
             ->addMediaConversion('preview')
-            ->fit(Manipulations::FIT_CROP, 300, 200)
+            ->crop(300, 200)
             ->nonQueued();
         $this
             ->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 50, 50)
+            ->crop(50,50)
             ->nonQueued();
 
     }

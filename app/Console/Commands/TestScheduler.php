@@ -12,6 +12,6 @@ class TestScheduler extends Command
 
     public function handle()
     {
-        ray('Test scheduler called at: '.now()->format('H:i:s'));
+        //ray('Test scheduler called at: '.now()->format('H:i:s'));
     }
 }

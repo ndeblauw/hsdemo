@@ -2,6 +2,8 @@
 
     {{__('Hello, how are you doing') }}
 
+    {{ \App\Models\Post::count() }} posts
+
     <div class="flex gap-6">
         <div class="w-2/3">
             <h2 class="font-bold">Latest News</h2>
@@ -41,19 +43,18 @@
                 @endforeach
             </ul>
 
+            {{--
             <livewire:todos user_id="11"/>
+            --}}
         </div>
 
         <div class="w-1/3">
+
             <livewire:weather-show-plugin/>
-
+{{--
             <livewire:hello-world/>
-
-            @if($quote!==null)
-                <div class="p-4 bg-gray-200 my-6">
-                    {{$quote->quote}}
-                </div>
-            @endif
+--}}
+            <x-random-quote category="money" />
 
             <div class="border border-teal-500 rounded-sm p-4">
                 <h2 class="font-bold">Our top authors</h2>
@@ -68,8 +69,5 @@
 
         </div>
     </div>
-
-
-
 
 </x-site-layout>

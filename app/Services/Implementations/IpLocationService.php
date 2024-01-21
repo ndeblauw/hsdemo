@@ -29,7 +29,7 @@ class IpLocationService implements IpService
 
     public function get(): self
     {
-        if (config('app.env') === 'local') {
+        if ($this->ip_address === '127.0.0.1') {
             $this->ip_address = '95.130.40.188'; // Hack for local development, set location to Bxl
         }
 
@@ -37,6 +37,7 @@ class IpLocationService implements IpService
             url: config('services.ipstack.endpoint')."/$this->ip_address",
             query: ['access_key' => config('services.ipstack.api_key')]
         );
+
         $response = json_decode($response->body());
 
         $this->city = $response->city;

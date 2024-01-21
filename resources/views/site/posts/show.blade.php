@@ -1,6 +1,3 @@
-
-
-
 <x-site-layout title="{{$post->title}}">
 
     @if(session()->has('referrer'))
@@ -32,7 +29,6 @@
         </div>
 
         <div class="w-1/4 flex-shrink-0">
-            <livewire:weather-show-plugin />
         </div>
     </div>
 

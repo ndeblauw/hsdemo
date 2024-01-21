@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        ray(auth()->user());
+        //ray(auth()->user());
 
         $users = User::paginate(3);
 
