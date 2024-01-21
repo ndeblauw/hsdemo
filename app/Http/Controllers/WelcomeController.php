@@ -19,7 +19,7 @@ class WelcomeController extends Controller
             return Post::isPublished()->with(['media', 'categories', 'author'])->take(4)->orderByDesc('published_at')->get();
         });
 
-        ray($recent_news->pluck('published_at', 'id')->map(fn($d) => $d?->toDateString())->toArray())->blue();
+        //ray($recent_news->pluck('published_at', 'id')->map(fn($d) => $d?->toDateString())->toArray())->blue();
 
         $authors = Cache::remember('welcome.authors', config('app.cache_ttl'), function () {
             return User::select(['name'])->with('posts')->get();
