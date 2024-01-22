@@ -13,13 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Category::factory(5)->create();
-        \App\Models\User::factory(10)->create();
-        $posts = \App\Models\Post::factory(10)->create();
-
-        foreach ($posts as $post) {
-            $post->categories()->attach([rand(1, 5), rand(1, 5)]);
-        }
+        $categories = \App\Models\Category::factory(5)->create();
+        $users = \App\Models\User::factory(10)->create();
+        $posts = \App\Models\Post::factory(10)
+                ->withImages()
+                ->recycle($users)
+                ->create()
+                ->each( fn($p) => $p->categories()->attach( $categories->random(rand(1, 3))) );
 
         User::create([
             'name' => 'Nico',
