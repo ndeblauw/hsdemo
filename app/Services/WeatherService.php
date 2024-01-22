@@ -17,7 +17,7 @@ class WeatherService
 
     private float $lon;
 
-    public string $city;
+    public string $city = 'none';
 
     public function __construct(protected IpService $ipservice)
     {

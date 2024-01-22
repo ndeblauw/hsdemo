@@ -13,8 +13,7 @@ test('posts index page is being displayed', function () {
 
 test('posts show page is being displayed', function () {
     // Arrange
-    $author = User::factory()->create();
-    $post = Post::factory()->create(['author_id' => 1]);
+    $post = Post::factory()->create();
 
     // Act
     $response = $this->get('/posts/'.$post->slug);

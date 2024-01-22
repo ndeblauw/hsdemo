@@ -1,6 +1,20 @@
 <?php
 
 use App\Models\Post;
+use App\Services\Implementations\GetQuoteService;
+
+beforeEach(function () {
+    $fakeQuote = Mockery::mock(GetQuoteService::class);
+    $fakeQuote->shouldReceive('get')->andReturn(null);
+    $this->app->instance(GetQuoteService::class, $fakeQuote);
+
+    $fakeWeather = Mockery::mock(\App\Services\WeatherService::class);
+    $fakeWeather->shouldReceive('getTemperature')->andReturn(66.6);
+    $fakeWeather->shouldReceive('getDescription')->andReturn('Develishly hot');
+    $fakeWeather->shouldReceive('setLocationFromIp')->andReturnSelf();
+    $this->app->instance(\App\Services\WeatherService::class, $fakeWeather);
+
+});
 
 test('welcome page is being displayed', function () {
     // Act
@@ -12,7 +26,7 @@ test('welcome page is being displayed', function () {
 
 test('4 most recent articles are shown', function () {
     // Arrange
-    $posts = Post::factory(5)->withoutAfterCreating()->published()
+    $posts = Post::factory(5)->published()
         ->create(['is_featured' => false])
         ->sortByDesc(fn ($p) => $p->published_at);
 
@@ -26,7 +40,7 @@ test('4 most recent articles are shown', function () {
 
 test('4 most recent articles are shown (and no unpublished ones)', function () {
     // Arrange
-    $posts = Post::factory(5)->withoutAfterCreating()->published()
+    $posts = Post::factory(5)->published()
         ->create(['is_featured' => false])
         ->sortByDesc(fn ($p) => $p->published_at);
 
