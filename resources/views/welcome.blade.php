@@ -47,7 +47,7 @@
         <div class="w-1/3">
             <livewire:weather-show-plugin/>
 
-            <livewire:hello-world/>
+            {{--<livewire:hello-world/>--}}
 
             @if($quote!==null)
                 <div class="p-4 bg-gray-200 my-6">

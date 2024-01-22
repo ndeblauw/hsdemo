@@ -32,7 +32,9 @@
         </div>
 
         <div class="w-1/4 flex-shrink-0">
+{{--
             <livewire:weather-show-plugin />
+--}}
         </div>
     </div>
 
