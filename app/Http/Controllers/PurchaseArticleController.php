@@ -48,8 +48,6 @@ class PurchaseArticleController extends Controller
         $paymentId = $request->input('id');
         $payment = Mollie::api()->payments->get($paymentId);
 
-        ray($payment);
-
         if($payment->isPaid()) {
             $post = Post::find($payment->metadata->post_id);
 

@@ -11,7 +11,7 @@ class WeatherService
 
     private string $api_key;
 
-    private $cache_ttl;
+    private int $cache_ttl;
 
     private float $lat;
 
@@ -48,12 +48,12 @@ class WeatherService
         return $this;
     }
 
-    public function getTemperature()
+    public function getTemperature(): float
     {
         return $this->getWeather()->main->temp;
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getWeather()->weather[0]->description;
     }
@@ -74,7 +74,7 @@ class WeatherService
             });
     }
 
-    private function getWeather()
+    private function getWeather(): object
     {
         return cache()->remember(
             key: "weather-{$this->lat}-{$this->lon}",
