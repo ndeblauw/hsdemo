@@ -69,6 +69,11 @@ class Post extends Model implements HasMedia
         return $this->published_at->lt(now()->subMonths(2));
     }
 
+    public function getIsPublishedAttribute(): bool
+    {
+        return $this->published_at !== null && $this->published_at->lt(now());
+    }
+
     public function getTimeSincePublishedAttribute(): string
     {
         if ($this->is_old) {
@@ -81,7 +86,7 @@ class Post extends Model implements HasMedia
     // Model scopes -----------------------------------------------------------------
     public function scopeIsPublished($query)
     {
-        return $query->whereNotNull('published_at');
+        return $query->whereNotNull('published_at')->where('published_at', '<', now());
     }
 
     // Model method ------------------------------------------------------------------
