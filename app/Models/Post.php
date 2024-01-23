@@ -104,6 +104,7 @@ class Post extends Model implements HasMedia
 
     public function createUniqueSlug(): string
     {
+        return 'not implemented yet';
         $nr = 0;
         do {
             $slug = ($nr === 0)
