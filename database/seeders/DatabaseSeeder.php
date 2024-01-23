@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         $categories = \App\Models\Category::factory(5)->create();
         $users = \App\Models\User::factory(10)->create();
         $posts = \App\Models\Post::factory(10)
-                ->withImages()
-                ->recycle($users)
-                ->create()
-                ->each( fn($p) => $p->categories()->attach( $categories->random(rand(1, 3))) );
+            ->withImages()
+            ->recycle($users)
+            ->create()
+            ->each(fn ($p) => $p->categories()->attach($categories->random(rand(1, 3))));
 
         User::create([
             'name' => 'Nico',

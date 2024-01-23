@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
 use App\Notifications\InformAuthorOfPurchase;
 use App\Notifications\ThankSponsorAfterPurchase;
 use Illuminate\Http\Request;
@@ -15,22 +14,22 @@ class PurchaseArticleController extends Controller
     {
         $webhook_url = config('app.env') === 'production'
             ? route('webhooks.mollie')
-            : "https://yjves6yjou.sharedwithexpose.com/webhooks/mollie";
+            : 'https://yjves6yjou.sharedwithexpose.com/webhooks/mollie';
 
         // validate!!!!!!!!!!!!
         $price = $request->amount;
 
         $payment = Mollie::api()->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => $price,
+            'amount' => [
+                'currency' => 'EUR',
+                'value' => $price,
             ],
-            "description" => "Order of post [".$post->id."] ".$post->title,
-            "redirectUrl" => route('posts.purchase.success', ['post' => $post]),
-            "webhookUrl" => $webhook_url,
-            "metadata" => [
-                "post_id" => $post->id,
-                "sponsor_id" => auth()->id(),
+            'description' => 'Order of post ['.$post->id.'] '.$post->title,
+            'redirectUrl' => route('posts.purchase.success', ['post' => $post]),
+            'webhookUrl' => $webhook_url,
+            'metadata' => [
+                'post_id' => $post->id,
+                'sponsor_id' => auth()->id(),
             ],
         ]);
 
@@ -48,12 +47,12 @@ class PurchaseArticleController extends Controller
         $paymentId = $request->input('id');
         $payment = Mollie::api()->payments->get($paymentId);
 
-        if($payment->isPaid()) {
+        if ($payment->isPaid()) {
             $post = Post::find($payment->metadata->post_id);
 
             $post->update([
-                    'sponsor_id' => $payment->metadata->sponsor_id,
-                ]);
+                'sponsor_id' => $payment->metadata->sponsor_id,
+            ]);
 
             $post->sponsor->notify(new ThankSponsorAfterPurchase($post));
             $post->author->notify(new InformAuthorOfPurchase($post));
@@ -62,7 +61,7 @@ class PurchaseArticleController extends Controller
 
     public function success(Post $post)
     {
-        if($post->isSponsored()) {
+        if ($post->isSponsored()) {
             session()->flash('purchase_success', 'Thank you for buying this article');
         } else {
             session()->flash('purchase_pending', 'We are expecting the payment to be concluded soon');
@@ -70,5 +69,4 @@ class PurchaseArticleController extends Controller
 
         return redirect()->route('posts.show', ['post' => $post]);
     }
-
 }

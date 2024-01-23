@@ -51,7 +51,7 @@ class Post extends Model implements HasMedia
 
     public function sponsor(): BelongsTo
     {
-        return $this->belongsTo(User::class,'sponsor_id');
+        return $this->belongsTo(User::class, 'sponsor_id');
     }
 
     // Model attributes --------------------------------------------------------
@@ -111,7 +111,7 @@ class Post extends Model implements HasMedia
     }
 
     // Medialibrary settings ----------------------------------------------------------
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this
             ->addMediaConversion('preview')

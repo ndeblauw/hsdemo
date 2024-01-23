@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Models\User;
 use App\Services\Implementations\GetQuoteService;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 class WelcomeController extends Controller
 {
@@ -28,5 +27,4 @@ class WelcomeController extends Controller
 
         return view('welcome', compact('recent_news', 'authors', 'quote'));
     }
-
 }

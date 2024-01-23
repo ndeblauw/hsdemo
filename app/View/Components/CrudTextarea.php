@@ -16,7 +16,7 @@ class CrudTextarea extends Component
 
     public ?string $placeholder;
 
-    public function __construct(string $name, string $label, string $value = null, string $placeholder = null)
+    public function __construct(string $name, string $label, ?string $value = null, ?string $placeholder = null)
     {
         $this->name = $name;
         $this->label = $label;

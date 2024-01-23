@@ -2,7 +2,6 @@
 
 namespace App\Services\Implementations;
 
-use App\Services\Interfaces\IpService;
 use Illuminate\Support\Facades\Http;
 
 class GetQuoteService
@@ -31,5 +30,4 @@ class GetQuoteService
 
         return $quote;
     }
-
 }

@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Collection;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
@@ -13,6 +12,7 @@ use Illuminate\Support\Collection;
 class PostFactory extends Factory
 {
     private bool $generate_images = false;
+
     /**
      * Define the model's default state.
      *
@@ -34,16 +34,16 @@ class PostFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
+                'published_at' => fake()->dateTimeBetween('-1 year', '-1 day'),
             ];
         });
     }
 
     public function configure()
     {
-         return $this->afterCreating(function (Post $post) {
-             return $post;
-         });
+        return $this->afterCreating(function (Post $post) {
+            return $post;
+        });
     }
 
     // Solution from https://laracasts.com/discuss/channels/testing/how-to-disable-factory-callbacks

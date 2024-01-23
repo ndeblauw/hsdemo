@@ -13,8 +13,6 @@ Route::get('posts/{post:slug}/buy', [\App\Http\Controllers\PurchaseArticleContro
 Route::get('posts/{post:slug}/success', [\App\Http\Controllers\PurchaseArticleController::class, 'success'])->name('posts.purchase.success');
 Route::post('webhooks/mollie', [\App\Http\Controllers\PurchaseArticleController::class, 'webhook'])->name('webhooks.mollie');
 
-
-
 Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 Route::get('users/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
