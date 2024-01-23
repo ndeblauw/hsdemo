@@ -20,7 +20,7 @@ jobs:
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
     - name: Try restore the vendor directory from cache
-      uses: actions/cache/restore@v3
+      uses: actions/cache/restore@v4
       id: composer-github-cache
       with:
         path: vendor
