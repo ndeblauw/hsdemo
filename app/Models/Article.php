@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
+
+    // Model relations -------------------------------------------
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
