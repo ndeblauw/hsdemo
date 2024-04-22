@@ -1,21 +1,20 @@
 <x-site-layout title="Start writing an article">
 
-    <div class="bg-red-50 rounded p-2 text-red-500">
-        {{ $errors->any() ? $errors : ''}}
-    </div>
+    @if($errors->any())
+        <div class="bg-red-50 rounded p-2 text-red-500">
+            {{ $errors->any() ? $errors : ''}}
+        </div>
+    @endif
 
-    <form action="{{route('articles.store')}}" method="post"
-          class="flex flex-col gap-4">
+    <form action="{{route('articles.store')}}" method="post" class="flex flex-col gap-4">
         @csrf
 
         <x-form-text label="Title" name="title" />
         <x-form-textarea label="Article" name="content" rows="5"/>
 
-
-        <div>
+        <div class="mt-4 flex justify-end">
             <button type="submit" class="p-1 bg-teal-500 text-white rounded">Create</button>
         </div>
-
     </form>
 
 </x-site-layout>

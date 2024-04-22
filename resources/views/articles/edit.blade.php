@@ -6,8 +6,7 @@
         </div>
     @endif
 
-    <form action="{{route('articles.update', ['article' => $article->id])}}" method="post"
-          class="flex flex-col gap-4">
+    <form action="{{route('articles.update', ['article' => $article->id])}}" method="post" class="flex flex-col gap-4">
         @csrf
         @method('PUT')
 
@@ -15,10 +14,9 @@
         <x-form-textarea label="Article" name="content" rows="5" value="{{$article->content}}"/>
         <x-form-text label="User id" name="user_id" value="{{$article->user_id}}"/>
 
-        <div>
+        <div class="mt-4 flex justify-end">
             <button type="submit" class="p-1 bg-teal-500 text-white rounded">Update</button>
         </div>
-
     </form>
 
 </x-site-layout>
