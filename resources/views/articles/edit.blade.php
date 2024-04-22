@@ -12,16 +12,7 @@
         @method('PUT')
 
         <x-form-text label="Title" name="title" value="{{$article->title}}"/>
-
-        <label for="content" class="w-full">
-            Article:<br/>
-            <textarea id="content" name="content"
-                     class="w-full @if($errors->has('content'))border border-red-500 @endif"
-                      rows="5">{{old('content',$article->content)}}</textarea>
-            @error('content')<span class="text-red-500 text-xs">{{$message}}</span>@enderror
-
-        </label>
-
+        <x-form-textarea label="Article" name="content" rows="5" value="{{$article->content}}"/>
         <x-form-text label="User id" name="user_id" value="{{$article->user_id}}"/>
 
         <div>

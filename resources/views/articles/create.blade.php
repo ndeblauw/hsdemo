@@ -9,15 +9,7 @@
         @csrf
 
         <x-form-text label="Title" name="title" />
-        
-        <label for="content" class="w-full">
-            Article:<br/>
-            <textarea id="content" name="content"
-                      class="w-full @if($errors->has('content'))border border-red-500 @endif"
-                      rows="5">{{old('content')}}</textarea>
-            @error('content')<span class="text-red-500 text-xs">{{$message}}</span>@enderror
-
-        </label>
+        <x-form-textarea label="Article" name="content" rows="5"/>
 
 
         <div>
