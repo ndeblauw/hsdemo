@@ -10,3 +10,5 @@ Route::resource('authors', \App\Http\Controllers\AuthorController::class)->only(
 Route::get('articles', function() {
     return view('articles');
 });
+Route::resource('articles', \App\Http\Controllers\ArticleController::class);
+
