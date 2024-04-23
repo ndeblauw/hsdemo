@@ -24,7 +24,13 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         Category::factory(5)->create();
-        Article::factory(10)->create();
+        $articles = Article::factory(10)->create();
+
+        foreach($articles as $article) {
+            $article->categories()->attach([rand(1, 5), rand(1, 5)]);
+        }
+
+
 
     }
 }
