@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
         $articles = Article::factory(10)->create();
 
         foreach($articles as $article) {
-            $article->categories()->attach([rand(1, 5), rand(1, 5)]);
+            // Create array with 1 or 2 unique random numers between 1 and 5
+            $keyword_ids = collect([rand(1, 5), rand(1, 5)])->unique()->toArray();
+
+            $article->categories()->attach($keyword_ids);
         }
 
 
