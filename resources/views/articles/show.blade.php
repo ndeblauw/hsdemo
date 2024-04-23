@@ -5,6 +5,20 @@
     </div>
 
     <div>
+        Categories:
+
+        <div class="flex flex-row gap-2">
+            @foreach($article->categories as $category)
+                <span class="bg-purple-100 text-purple-500 p-1 rounded">
+                {{ $category->name }}
+            </span>
+            @endforeach
+
+        </div>
+
+    </div>
+
+    <div>
         Written by: {{$article->author->name}}
     </div>
 

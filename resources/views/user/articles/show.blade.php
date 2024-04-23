@@ -1,9 +1,9 @@
 <x-site-layout title="{{$article->title}}">
 
     <div class="flex justify-center w-full mb-4 gap-4">
-        <a href="{{route('articles.index')}}" class="p-1 bg-teal-500 text-white rounded">Back to index</a>
+        <a href="{{route('user.articles.index')}}" class="p-1 bg-teal-500 text-white rounded">Back to index</a>
 
-        <a href="{{route('articles.edit', ['article' => $article->id])}}" class="p-1 bg-teal-500 text-white rounded">edit</a>
+        <a href="{{route('user.articles.edit', ['article' => $article->id])}}" class="p-1 bg-teal-500 text-white rounded">edit</a>
     </div>
 
     @if( session('success_message') !== null)

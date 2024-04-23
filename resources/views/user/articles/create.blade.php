@@ -6,7 +6,7 @@
         </div>
     @endif
 
-    <form action="{{route('articles.store')}}" method="post" class="flex flex-col gap-4">
+    <form action="{{route('user.articles.store')}}" method="post" class="flex flex-col gap-4">
         @csrf
 
         <x-form-text label="Title" name="title" />
