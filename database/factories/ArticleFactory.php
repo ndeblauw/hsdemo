@@ -20,6 +20,7 @@ class ArticleFactory extends Factory
             'title' => fake()->sentence,
             'content' => fake()->paragraph,
             'user_id' => fake()->numberBetween(1, 10),
+            'created_at' => fake()->dateTimeThisYear,
         ];
     }
 }

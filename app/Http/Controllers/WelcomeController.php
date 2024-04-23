@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
     public function __invoke()
     {
-        $articles = Article::take(6)->get();
+        $articles = Article::latest('created_at')->take(6)->get();
 
         return view('welcome', ['articles' => $articles]);
     }
