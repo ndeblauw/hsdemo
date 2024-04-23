@@ -15,9 +15,15 @@ Route::get('articles', function() {
 // USER ROUTES
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::redirect('/dashboard', '/articles')->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware(['auth'])->prefix('user')->name('user.')->group( function() {
+    Route::resource('articles', \App\Http\Controllers\User\ArticleController::class);
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
