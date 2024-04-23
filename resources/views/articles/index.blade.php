@@ -1,24 +1,13 @@
-<x-site-layout title="List of articles of user 1">
+<x-site-layout title="List of articles">
 
-    <div class="flex justify-end w-full mb-4">
-        <a href="{{route('articles.create')}}" class="p-1 bg-teal-500 text-white rounded">Create new article</a>
+    <div class="grid grid-cols-2 gap-8">
+        @foreach($articles as $article)
+            <a href="{{route('articles.show', ['id' => $article->id])}}" class="p-2 bg-white rounded hover:shadow-xl">
+                <h3 class="font-bold text-xl">{{$article->title}}</h3>
+                <div class="text-purple-500">Author: {{$article->author->name }}</div>
+                <p>{{$article->content}}</p>
+            </a>
+        @endforeach
     </div>
-
-    @foreach($articles as $article)
-        <div class="bg-white p-1 mb-1 flex flex-row justify-between">
-            <h2 class="text-lg font-bold">{{$article->title}}</h2>
-            <div class="flex gap-2 text-sm">
-                <a href="{{route('articles.show', ['article' => $article->id])}}" class="text-blue-500">Details</a>
-                <a href="{{route('articles.edit', ['article' => $article->id])}}" class="text-blue-500">Edit</a>
-
-                <form action="{{route('articles.destroy', ['article' => $article->id])}}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="text-blue-500">Delete</button>
-                </form>
-
-            </div>
-        </div>
-    @endforeach
 
 </x-site-layout>
