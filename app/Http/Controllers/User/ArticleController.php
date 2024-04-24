@@ -70,6 +70,8 @@ class ArticleController extends Controller
             'user_id' => $request->user_id,
         ]);
 
+        $article->categories()->sync($request->categories);
+
         session()->flash('success_message', 'Your article was updated successfully');
 
         return redirect()->route('articles.show', ['article' => $article->id]);
