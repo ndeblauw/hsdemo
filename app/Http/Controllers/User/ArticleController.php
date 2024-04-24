@@ -44,14 +44,14 @@ class ArticleController extends Controller
 
         session()->flash('success_message', 'Your article was stored successfully');
 
-        return redirect()->route('articles.show', ['article' => $article->id]);
+        return redirect()->route('user.articles.show', ['article' => $article->id]);
     }
 
     public function show(string $id)
     {
         $article = Article::find($id);
 
-        if( ! !$article->isAllowedToEdit(auth()->user())) {
+        if(!$article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
@@ -62,7 +62,7 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        if( ! !$article->isAllowedToEdit(auth()->user())) {
+        if(!$article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
@@ -79,7 +79,7 @@ class ArticleController extends Controller
 
         $article = Article::find($id);
 
-        if( ! !$article->isAllowedToEdit(auth()->user())) {
+        if(!$article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
