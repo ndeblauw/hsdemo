@@ -40,8 +40,9 @@ class ArticleController extends Controller
             'user_id' => auth()->user()->id,
         ]);
 
-        session()->flash('success_message', 'Your article was stored successfully');
+        $article->categories()->sync($request->categories);
 
+        session()->flash('success_message', 'Your article was stored successfully');
 
         return redirect()->route('articles.show', ['article' => $article->id]);
     }

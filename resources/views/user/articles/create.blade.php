@@ -11,6 +11,7 @@
 
         <x-form-text label="Title" name="title" />
         <x-form-textarea label="Article" name="content" rows="5"/>
+        <x-form-checkboxes label="Categories" name="categories" :options="\App\Models\Category::orderBy('name')->pluck('name', 'id')->toArray()" />
 
         <div class="mt-4 flex justify-end">
             <button type="submit" class="p-1 bg-teal-500 text-white rounded">Create</button>
