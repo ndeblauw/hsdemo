@@ -16,7 +16,7 @@ require __DIR__.'/auth.php';
 
 
 
-Route::redirect('/dashboard', '/articles')->middleware(['auth', 'verified'])->name('dashboard');
+Route::redirect('/dashboard', 'user/articles')->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group( function() {
     Route::resource('articles', \App\Http\Controllers\User\ArticleController::class);
