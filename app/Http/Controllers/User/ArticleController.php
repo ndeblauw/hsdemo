@@ -10,7 +10,11 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::where('user_id', auth()->user()->id)->get();
+        if(auth()->user()->superadmin) {
+            $articles = Article::all();
+        } else {
+            $articles = Article::where('user_id', auth()->user()->id)->get();
+        }
 
         return view('user.articles.index', ['articles' => $articles]);
     }
@@ -44,12 +48,22 @@ class ArticleController extends Controller
 
     public function show(string $id)
     {
-        return view('user.articles.show', ['article' => Article::find($id) ]);
+        $article = Article::find($id);
+
+        if( ! !$article->isAllowedToEdit(auth()->user())) {
+            abort(401);
+        }
+
+        return view('user.articles.show', ['article' => $article ]);
     }
 
     public function edit(string $id)
     {
         $article = Article::find($id);
+
+        if( ! !$article->isAllowedToEdit(auth()->user())) {
+            abort(401);
+        }
 
         return view('user.articles.edit', ['article' => $article]);
     }
@@ -63,6 +77,10 @@ class ArticleController extends Controller
         ]);
 
         $article = Article::find($id);
+
+        if( ! !$article->isAllowedToEdit(auth()->user())) {
+            abort(401);
+        }
 
         $article->update([
             'title' => $request->title,
@@ -86,4 +104,5 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.index');
     }
+
 }

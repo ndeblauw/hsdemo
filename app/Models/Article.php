@@ -21,4 +21,16 @@ class Article extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    // Business logic for model -----------------------------------
+    public function isAllowedToEdit(User $user): bool
+    {
+        if($user->superadmin) {
+            return true;
+        }
+
+        return $user->id == $this->user_id;
+    }
+
+
 }

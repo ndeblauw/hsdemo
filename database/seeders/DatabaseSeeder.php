@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             "name" => "Nico Deblauwe",
             "email" => "nico@deblauwe.be",
+            "superadmin" => true,
             "password" => '$2y$12$bsncgdaWH2WNDcStnh5aF.SkUBSm3r.VurymzwDKc9MzU462pkjY2',
         ]);
 
