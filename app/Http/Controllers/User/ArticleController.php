@@ -57,7 +57,7 @@ class ArticleController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'title' => ['required', 'string', 'min:5', 'max:20'],
+            'title' => ['required', 'string', 'min:5', 'max:60'],
             'content' => 'required',
             'user_id' => ['required', 'numeric', 'exists:users,id'],
         ]);
@@ -74,7 +74,7 @@ class ArticleController extends Controller
 
         session()->flash('success_message', 'Your article was updated successfully');
 
-        return redirect()->route('articles.show', ['article' => $article->id]);
+        return redirect()->route('user.articles.show', ['article' => $article->id]);
     }
 
 
