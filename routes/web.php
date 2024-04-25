@@ -20,7 +20,8 @@ Route::redirect('/dashboard', 'user/articles')->middleware(['auth', 'verified'])
 
 Route::middleware(['auth'])->prefix('user')->name('user.')->group( function() {
     Route::resource('articles', \App\Http\Controllers\User\ArticleController::class);
-    Route::resource('categories', \App\Http\Controllers\User\CategoryController::class);
+    Route::resource('categories', \App\Http\Controllers\User\CategoryController::class)
+        ->middleware(\App\Http\Middleware\IsAdminMiddleware::class);
 });
 
 

@@ -1,6 +1,9 @@
 <x-site-layout title="List of articles of user {{auth()->user()->name}}">
 
     <div class="flex justify-end w-full mb-4">
+        @if(auth()->user()->superadmin)
+            <a href="{{route('user.categories.index')}}" class="mr-4 p-1 bg-indigo-400 text-white rounded">Manage categories</a>
+        @endif
         <a href="{{route('user.articles.create')}}" class="p-1 bg-teal-500 text-white rounded">Create new article</a>
     </div>
 

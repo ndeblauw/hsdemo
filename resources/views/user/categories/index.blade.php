@@ -1,4 +1,4 @@
-<x-site-layout title="List of articles of user {{auth()->user()->name}}">
+<x-site-layout title="List of categories used in application">
 
     @if( session('success_message') !== null)
         <div class="bg-green-50 text-green-500 p-2 rounded">
