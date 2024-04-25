@@ -75,6 +75,7 @@ class ArticleController extends Controller
             'title' => ['required', 'string', 'min:5', 'max:60'],
             'content' => 'required',
             'user_id' => ['required', 'numeric', 'exists:users,id'],
+            'photo' => ['nullable', 'file'],
         ]);
 
         $article = Article::find($id);
@@ -90,6 +91,10 @@ class ArticleController extends Controller
         ]);
 
         $article->categories()->sync($request->categories);
+
+        if($request->has('photo')) {
+            $article->addMediaFromRequest('photo')->toMediaCollection('photos');
+        }
 
         session()->flash('success_message', 'Your article was updated successfully');
 

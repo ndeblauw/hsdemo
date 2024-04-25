@@ -9,7 +9,10 @@
 
     @foreach($articles as $article)
         <div class="bg-white p-1 mb-1 flex flex-row justify-between">
-            <h2 class="text-lg font-bold">{{$article->title}}</h2>
+            <div class="flex">
+                <img src="{{$article->media->first()?->getUrl('preview')}}" class="w-6">
+                <h2 class="text-lg font-bold">{{$article->title}}</h2>
+            </div>
             <div class="flex gap-2 text-sm">
                 @if( $article->isAllowedToEdit(auth()->user()) )
                     <a href="{{route('user.articles.show', ['article' => $article->id])}}" class="text-blue-500">Details</a>
