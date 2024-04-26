@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         Category::factory(5)->create();
-        $articles = Article::factory(10)->create();
+        $articles = Article::factory(10)->withImages()->create();
 
         foreach($articles as $article) {
             // Create array with 1 or 2 unique random numers between 1 and 5
