@@ -48,6 +48,15 @@ class Article extends Model implements HasMedia
         return $this->media->first()?->getUrl('card');
     }
 
+    public function getFeaturedImageUrl()
+    {
+        if($this->media->first() === null) {
+            return '/img/default-article-image.jpg';
+        }
+
+        return $this->media->first()?->getUrl('features');
+    }
+
     // Media library logic -----------------------------------------
     public function registerMediaConversions(Media $media = null): void
     {
@@ -59,6 +68,9 @@ class Article extends Model implements HasMedia
             ->addMediaConversion('card')
             ->fit(FIT::Crop, 400, 100)
             ->nonQueued();
+        $this
+            ->addMediaConversion('features')
+            ->fit(FIT::Crop, 400, 300)
             ->nonQueued();
 
     }
