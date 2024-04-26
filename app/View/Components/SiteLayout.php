@@ -9,12 +9,14 @@ use Illuminate\View\Component;
 class SiteLayout extends Component
 {
     public string $title;
+    public bool $hide_title;
     /**
      * Create a new component instance.
      */
-    public function __construct(string $title = 'default')
+    public function __construct(string $title = 'default', bool $hideTitle = false)
     {
         $this->title = $title;
+        $this->hide_title = $hideTitle;
     }
 
     /**

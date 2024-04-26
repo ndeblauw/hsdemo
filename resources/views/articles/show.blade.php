@@ -1,4 +1,4 @@
-<x-site-layout title="{{$article->title}}">
+<x-site-layout title="{{$article->title}}" hideTitle>
 
     <div class="flex justify-center w-full mb-4 gap-4">
         <a href="{{route('articles.index')}}" class="p-1 bg-teal-500 text-white rounded">Back to index</a>
