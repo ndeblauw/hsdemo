@@ -1,5 +1,9 @@
 <x-site-layout title="List of articles">
 
+    <div class="mb-2">
+        {{$articles->links()}}
+    </div>
+
     <div class="grid grid-cols-2 gap-8">
         @foreach($articles as $article)
             <a href="{{route('articles.show', ['id' => $article->id])}}" class="p-2 bg-white rounded hover:shadow-xl">
