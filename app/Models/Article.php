@@ -57,7 +57,8 @@ class Article extends Model implements HasMedia
             ->nonQueued();
         $this
             ->addMediaConversion('card')
-            ->fit(FIT::Crop, 400, 50)
+            ->fit(FIT::Crop, 400, 100)
+            ->nonQueued();
             ->nonQueued();
 
     }
