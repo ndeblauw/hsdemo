@@ -21,8 +21,7 @@
     <div class="bg-white">
         <img src="{{$article->media->first()?->getUrl()}}" class="float-right w-48">
 
-
-        {{$article->content}}
+        {!! nl2br($article->content) !!}
     </div>
 
 </x-site-layout>
