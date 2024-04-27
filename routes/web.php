@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 // PUBLIC routes
 Route::get('/', \App\Http\Controllers\WelcomeController::class);
+
 Route::resource('authors', \App\Http\Controllers\AuthorController::class)->only('index', 'show');
+Route::resource('categories', \App\Http\Controllers\CategoryController::class)->only('index', 'show');
+
 Route::get('/articles', [\App\Http\Controllers\ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{id}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
 
