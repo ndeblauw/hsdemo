@@ -10,6 +10,10 @@ Route::get('/articles', [\App\Http\Controllers\ArticleController::class, 'index'
 Route::get('/articles/{id}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('articles.show');
 
 
+Route::get('/search', [\App\Http\Controllers\SearchController::class, 'create'])->name('search.create');
+Route::post('/search', [\App\Http\Controllers\SearchController::class, 'store'])->name('search.store');
+
+
 
 // USER ROUTES
 require __DIR__.'/auth.php';
