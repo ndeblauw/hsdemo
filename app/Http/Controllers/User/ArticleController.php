@@ -11,7 +11,7 @@ class ArticleController extends Controller
     public function index()
     {
         if(auth()->user()->superadmin) {
-            $articles = Article::all();
+            $articles = Article::with('media')->get();
         } else {
             $articles = Article::where('user_id', auth()->user()->id)->get();
         }
