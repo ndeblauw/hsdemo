@@ -18,7 +18,26 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        return view('articles.show', ['article' => $article]);
+        $related = $this->getRelatedArticles($article);
+
+        return view('articles.show', ['article' => $article, 'related' => $related]);
+    }
+
+    private function getRelatedArticles(Article $article, $numberOfArticles = 6)
+    {
+        $keywords = $article->categories->pluck('id');
+
+        $related = Article::query()
+            ->with('author', 'media', 'categories')
+            ->where('id', '!=', $article->id)
+            ->whereHas('categories', function($query) use ($keywords) {
+                $query->whereIn('categories.id', $keywords);
+                })
+            ->limit($numberOfArticles)
+            ->orderByDesc('created_at')
+            ->get();
+
+        return $related;
     }
 
 }
