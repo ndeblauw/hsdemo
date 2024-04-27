@@ -4,13 +4,13 @@
         Our guest author <strong>{{$author->name}}</strong> has written the following articles:
     </p>
 
-    <ul class="list-disc ml-5">
+    <div class="grid grid-cols-2 gap-8">
         @foreach($author->articles as $article)
-            <li>
-                {{$article->title}}
-            </li>
+
+            <x-article-display-card :article="$article"/>
+
         @endforeach
-    </ul>
+    </div>
 
 
     <div class="w-full text-center mt-6">
