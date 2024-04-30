@@ -26,7 +26,7 @@ class SearchController extends Controller
             ->where('name','LIKE', '%'.$search_term.'%')
             ->first();
 
-        $articles_from_keyword = $category->articles;
+        $articles_from_keyword = $category?->articles;
 
 
         // Look for articles with the search term
