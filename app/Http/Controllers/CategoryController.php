@@ -12,13 +12,13 @@ class CategoryController extends Controller
     {
         $categories = Category::get();
 
-        return view('categories.index', ['categories' => $categories]);
+        return view('public.categories.index', ['categories' => $categories]);
     }
 
     public function show(string $id)
     {
         $category = Category::find($id);
 
-        return view('categories.show', ['category' => $category]);
+        return view('public.categories.show', ['category' => $category]);
     }
 }

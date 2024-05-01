@@ -11,6 +11,6 @@ class WelcomeController extends Controller
     {
         $articles = Article::with('author', 'categories', 'media')->latest('created_at')->take(6)->get();
 
-        return view('welcome', ['articles' => $articles]);
+        return view('public.welcome', ['articles' => $articles]);
     }
 }

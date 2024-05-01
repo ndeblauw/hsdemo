@@ -10,7 +10,7 @@ class SearchController extends Controller
 {
     public function create()
     {
-        return view('search.form');
+        return view('public.search.form');
     }
 
     public function store(Request $request)
@@ -38,7 +38,7 @@ class SearchController extends Controller
 
         $articles = $articles_direct->union($articles_from_keyword);
 
-        return view('search.results', compact('articles', 'search_term'));
+        return view('public.search.results', compact('articles', 'search_term'));
 
 
     }

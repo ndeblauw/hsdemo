@@ -11,7 +11,7 @@ class ArticleController extends Controller
         $articles = Article::with('author', 'media')
             ->orderByDesc('created_at')->paginate(4);
 
-        return view('articles.index', ['articles' => $articles]);
+        return view('public.articles.index', ['articles' => $articles]);
     }
 
     public function show($id)
@@ -20,7 +20,7 @@ class ArticleController extends Controller
 
         $related = $this->getRelatedArticles($article);
 
-        return view('articles.show', ['article' => $article, 'related' => $related]);
+        return view('public.articles.show', ['article' => $article, 'related' => $related]);
     }
 
     private function getRelatedArticles(Article $article, $numberOfArticles = 6)
