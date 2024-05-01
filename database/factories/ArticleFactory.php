@@ -19,7 +19,7 @@ class ArticleFactory extends Factory
     {
         return [
             'title' => fake()->sentence,
-            'content' => $this->generateTextInParagraphs(random_int(1,5)),
+            'content' => $this->generateTextInParagraphs(random_int(1, 5)),
             'user_id' => fake()->numberBetween(1, 10),
             'created_at' => fake()->dateTimeThisYear,
         ];
@@ -30,7 +30,7 @@ class ArticleFactory extends Factory
         $text = '';
 
         for ($i = 0; $i < $numberOfParagrpahs; $i++) {
-            $text .= fake()->realText(random_int(200, 1000)) . "\n\n";
+            $text .= fake()->realText(random_int(200, 1000))."\n\n";
         }
 
         return $text;

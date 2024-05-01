@@ -9,7 +9,6 @@ use Illuminate\View\Component;
 
 class ArticleDisplayCard extends Component
 {
-
     public function __construct(public Article $article)
     {
         //

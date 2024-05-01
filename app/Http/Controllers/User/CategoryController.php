@@ -33,7 +33,7 @@ class CategoryController extends Controller
         session()->flash('success_message', 'Your category was created successfully');
 
         return redirect()->route('user.categories.index');
-}
+    }
 
     /**
      * Display the specified resource.
@@ -79,9 +79,9 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        if($category->articles->count() > 0) {
+        if ($category->articles->count() > 0) {
             abort(403, 'This category has articles and cannot be deleted');
-        };
+        }
 
         // Checking if a category can be deleted
 

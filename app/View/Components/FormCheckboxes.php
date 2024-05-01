@@ -14,8 +14,7 @@ class FormCheckboxes extends Component
         public string $name,
         public Collection|array $options,
         public Collection|array $values = [],
-    )
-    {
+    ) {
         // Assure that both options and values are collections
         $this->options = (gettype($this->options) === 'array') ? collect($this->options) : $this->options;
         $this->values = (gettype($this->values) === 'array') ? collect($this->values) : $this->values;

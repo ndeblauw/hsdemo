@@ -30,14 +30,13 @@ class ArticleController extends Controller
         $related = Article::query()
             ->with('author', 'media', 'categories')
             ->where('id', '!=', $article->id)
-            ->whereHas('categories', function($query) use ($keywords) {
+            ->whereHas('categories', function ($query) use ($keywords) {
                 $query->whereIn('categories.id', $keywords);
-                })
+            })
             ->limit($numberOfArticles)
             ->orderByDesc('created_at')
             ->get();
 
         return $related;
     }
-
 }

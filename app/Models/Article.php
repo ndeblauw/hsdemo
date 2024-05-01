@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Enums\Fit;
-use Spatie\MediaLibrary\Conversions\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -31,7 +30,7 @@ class Article extends Model implements HasMedia
     // Business logic for model -----------------------------------
     public function isAllowedToEdit(User $user): bool
     {
-        if($user->superadmin) {
+        if ($user->superadmin) {
             return true;
         }
 
@@ -41,7 +40,7 @@ class Article extends Model implements HasMedia
     // Custom methods ----------------------------------------------
     public function getCardImageUrl()
     {
-        if($this->media->first() === null) {
+        if ($this->media->first() === null) {
             return '/img/default-article-image.jpg';
         }
 
@@ -50,7 +49,7 @@ class Article extends Model implements HasMedia
 
     public function getFeaturedImageUrl()
     {
-        if($this->media->first() === null) {
+        if ($this->media->first() === null) {
             return '/img/default-article-image.jpg';
         }
 
@@ -58,7 +57,7 @@ class Article extends Model implements HasMedia
     }
 
     // Media library logic -----------------------------------------
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this
             ->addMediaConversion('preview')
@@ -74,6 +73,4 @@ class Article extends Model implements HasMedia
             ->nonQueued();
 
     }
-
-
 }

@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        if(auth()->user()->superadmin) {
+        if (auth()->user()->superadmin) {
             $articles = Article::with('media')->get();
         } else {
             $articles = Article::where('user_id', auth()->user()->id)->get();
@@ -51,18 +51,18 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        if(!$article->isAllowedToEdit(auth()->user())) {
+        if (! $article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
-        return view('user.articles.show', ['article' => $article ]);
+        return view('user.articles.show', ['article' => $article]);
     }
 
     public function edit(string $id)
     {
         $article = Article::find($id);
 
-        if(!$article->isAllowedToEdit(auth()->user())) {
+        if (! $article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
@@ -80,7 +80,7 @@ class ArticleController extends Controller
 
         $article = Article::find($id);
 
-        if(!$article->isAllowedToEdit(auth()->user())) {
+        if (! $article->isAllowedToEdit(auth()->user())) {
             abort(401);
         }
 
@@ -92,7 +92,7 @@ class ArticleController extends Controller
 
         $article->categories()->sync($request->categories);
 
-        if($request->has('photo')) {
+        if ($request->has('photo')) {
             $article->addMediaFromRequest('photo')->toMediaCollection('photos');
         }
 
@@ -100,7 +100,6 @@ class ArticleController extends Controller
 
         return redirect()->route('user.articles.show', ['article' => $article->id]);
     }
-
 
     public function destroy(string $id)
     {
@@ -110,5 +109,4 @@ class ArticleController extends Controller
 
         return redirect()->route('articles.index');
     }
-
 }

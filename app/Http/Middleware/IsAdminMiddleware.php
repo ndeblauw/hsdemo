@@ -10,7 +10,7 @@ class IsAdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if( ! auth()->user()->superadmin ) {
+        if (! auth()->user()->superadmin) {
             abort(401);
         }
 

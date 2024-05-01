@@ -16,8 +16,7 @@ class FormTextarea extends Component
         public string $name,
         public int $rows = 3,
         public ?string $value = null,
-    )
-    {
+    ) {
         //
     }
 

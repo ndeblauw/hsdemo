@@ -16,18 +16,17 @@ class SearchController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'search' => 'required|string|min:3|max:255'
+            'search' => 'required|string|min:3|max:255',
         ]);
 
         $search_term = $request->search;
 
         // Look for keywords with the search term
         $category = Category::query()
-            ->where('name','LIKE', '%'.$search_term.'%')
+            ->where('name', 'LIKE', '%'.$search_term.'%')
             ->first();
 
         $articles_from_keyword = $category?->articles;
-
 
         // Look for articles with the search term
         $articles_direct = Article::query()
@@ -35,11 +34,9 @@ class SearchController extends Controller
             ->orWhere('content', 'LIKE', '%'.$search_term.'%')
             ->get();
 
-
         $articles = $articles_direct->union($articles_from_keyword);
 
         return view('public.search.results', compact('articles', 'search_term'));
-
 
     }
 }
