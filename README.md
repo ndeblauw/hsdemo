@@ -14,6 +14,11 @@ This project uses
 Nothing but the normal ones
 
 ## Dev Installation instructions 
-You install this project (clone git, composer install) 
-and then migrate the tables: `php artisan migrate` 
-and then seed date: `php artisan db:seed`.
+- create a directory for the project 
+- clone the project into this directoy
+- run `composer install`
+- create a configuration .env file: `cp .env.example .env`
+- you need to set a key in the .env: `php artisan key:generate`
+- if using sqlite: do execute `touch database/database.sqlite`
+- and then migrate the tables: `php artisan migrate` 
+- and then seed date: `php artisan db:seed`.
