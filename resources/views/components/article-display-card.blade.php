@@ -8,6 +8,6 @@
     </div>
 
     <h3 class="font-bold text-xl">{{$article->title}}</h3>
-    <div> <span class="text-teal-400 font-bold">&gt</span> {{$article->author->name }}</div>
+    <div> <span class="text-teal-400 font-bold">&gt</span> {{$article->author?->name ?? "UNKNOWN" }}</div>
     <p class="line-clamp-3">{{ Str::limit($article->content,300)}}</p>
 </a>
