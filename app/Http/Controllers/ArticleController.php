@@ -28,6 +28,7 @@ class ArticleController extends Controller
         $keywords = $article->categories->pluck('id');
 
         $related = Article::query()
+            ->select('id','title')
             ->with('author', 'media', 'categories')
             ->where('id', '!=', $article->id)
             ->whereHas('categories', function ($query) use ($keywords) {
