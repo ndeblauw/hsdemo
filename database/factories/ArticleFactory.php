@@ -17,11 +17,22 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
+        $n = random_int(30,50);
+
         return [
             'title' => fake()->sentence,
-            'content' => $this->generateTextInParagraphs(random_int(1, 5)),
+            'content' => $this->generateTextInParagraphs($n),
             'user_id' => fake()->numberBetween(1, 10),
             'created_at' => fake()->dateTimeThisYear,
+
+            'content_fr' => $this->generateTextInParagraphs($n),
+            'content_nl' => $this->generateTextInParagraphs($n),
+            'content_de' => $this->generateTextInParagraphs($n),
+            'content_es' => $this->generateTextInParagraphs($n),
+            'content_dk' => $this->generateTextInParagraphs($n),
+            'content_se' => $this->generateTextInParagraphs($n),
+            'content_th' => $this->generateTextInParagraphs($n),
+            'content_ge' => $this->generateTextInParagraphs($n),
         ];
     }
 
@@ -30,7 +41,7 @@ class ArticleFactory extends Factory
         $text = '';
 
         for ($i = 0; $i < $numberOfParagrpahs; $i++) {
-            $text .= fake()->realText(random_int(200, 1000))."\n\n";
+            $text .= fake()->realText(random_int(800, 1000))."\n\n";
         }
 
         return $text;

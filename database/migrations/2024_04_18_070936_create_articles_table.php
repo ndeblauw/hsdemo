@@ -18,6 +18,15 @@ return new class extends Migration
             $table->text('content');
             $table->foreignId('user_id');
 
+            $table->text('content_fr');
+            $table->text('content_nl');
+            $table->text('content_de');
+            $table->text('content_es');
+            $table->text('content_dk');
+            $table->text('content_se');
+            $table->text('content_th');
+            $table->text('content_ge');
+
             $table->timestamps();
         });
     }

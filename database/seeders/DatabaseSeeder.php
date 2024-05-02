@@ -25,11 +25,11 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         Category::factory(5)->create();
-        $articles = Article::factory(10)->withImages()->create();
+        $articles = Article::factory(20)->withImages()->create();
 
         foreach ($articles as $article) {
-            // Create array with 1 or 2 unique random numers between 1 and 5
-            $keyword_ids = collect([rand(1, 5), rand(1, 5)])->unique()->toArray();
+            // Create array with 1,2 or 3 unique random numers between 1 and 5
+            $keyword_ids = collect([rand(1, 5), rand(1, 5), rand(1, 5)])->unique()->toArray();
 
             $article->categories()->attach($keyword_ids);
         }
