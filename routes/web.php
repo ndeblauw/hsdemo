@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // PUBLIC routes
 Route::get('/', \App\Http\Controllers\WelcomeController::class);
+Route::view('/empty', 'empty');
 
 Route::resource('authors', \App\Http\Controllers\AuthorController::class)->only('index', 'show');
 Route::resource('categories', \App\Http\Controllers\CategoryController::class)->only('index', 'show');
